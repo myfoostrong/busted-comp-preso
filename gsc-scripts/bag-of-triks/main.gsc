@@ -1,3 +1,8 @@
+//Author: trik
+//Purpose: GSC Menu for DEFCON 26 Busted Computing Talk
+
+
+
 /*
 *	 Black Ops 2 - GSC Studio by iMCSx
 *
@@ -13,6 +18,7 @@
 #include maps\mp\gametypes\_hud_util;
 #include maps\mp\gametypes\_hud_message;
 
+//yes
 /* Black Ops 2 - Menu Base ( Multiplayers And Zombie )
    Build: 1.0.0
    Made By ZeiiKeN & Fanatik
@@ -26,6 +32,7 @@ init()
 {
 	level.clientid = 0;
     level thread onPlayerConnect();
+    
 }
 
 onPlayerConnect()
@@ -174,19 +181,20 @@ MenuStructure()
     if (self.Verified == true)
 	{
 	self MainMenu("Main Menu", undefined);
-	self MenuOption("Main Menu", 0, "Sub Menu 1", ::SubMenu, "Sub Menu 1");
-	self MenuOption("Main Menu", 1, "Sub Menu 2", ::SubMenu, "Sub Menu 2");
-	self MenuOption("Main Menu", 2, "Sub Menu 3", ::SubMenu, "Sub Menu 3");
-	self MenuOption("Main Menu", 3, "Sub Menu 4", ::SubMenu, "Sub Menu 4");
+	self MenuOption("Main Menu", 0, "Info Harvesting", ::SubMenu, "Info Harvesting");
+	self MenuOption("Main Menu", 1, "Self Mods", ::SubMenu, "Self Mods");
+	self MenuOption("Main Menu", 2, "1337 Proz", ::SubMenu, "1337 Proz");
+	self MenuOption("Main Menu", 3, "Peer Attacks", ::SubMenu, "Peer Attacks");
+	self MenuOption("Main Menu", 4, "Hacking Back Policy", ::SubMenu, "Hacking Back Policy");
 	}
 	if (self.VIP == true)
 	{
-	self MenuOption("Main Menu", 4, "Sub Menu 5 (VIP)", ::SubMenu, "Sub Menu 5 (VIP)");
+	self MenuOption("Main Menu", 5, "Sub Menu 5 (VIP)", ::SubMenu, "Sub Menu 5 (VIP)");
 	}
-	if (self.Admin == true)
-	{
-	self MenuOption("Main Menu", 5, "Sub Menu 6 (Admin)", ::SubMenu, "Sub Menu 6 (Admin)");
-	}
+//	if (self.Admin == true)
+//	{
+//	self MenuOption("Main Menu", 6, "Sub Menu 6 (Admin)", ::SubMenu, "Sub Menu 6 (Admin)");
+//	}
 	if (self.CoHost == true)
 	{
 	self MenuOption("Main Menu", 6, "Sub Menu 7 (Host)", ::SubMenu, "Sub Menu 7 (Host)");
@@ -194,37 +202,45 @@ MenuStructure()
 	self MenuOption("Main Menu", 8, "All Clients", ::SubMenu, "All Clients");
 	}
 	
-	self MainMenu("Sub Menu 1", "Main Menu");
-	self MenuOption("Sub Menu 1", 0, "Fonctions Here", ::Test);
-	self MenuOption("Sub Menu 1", 1, "Fonctions Here", ::Test);
-	self MenuOption("Sub Menu 1", 2, "Fonctions Here", ::Test);
-	self MenuOption("Sub Menu 1", 3, "Fonctions Here", ::Test);
-	self MenuOption("Sub Menu 1", 4, "Fonctions Here", ::Test);
-	self MenuOption("Sub Menu 1", 5, "Fonctions Here", ::Test);
+	self MainMenu("Info Harvesting", "Main Menu");
+	self MenuOption("Info Harvesting", 0, "Game Data", ::GetGameData);
+	self MenuOption("Info Harvesting", 1, "Session Data", ::GetCurrentSessionData);
+	self MenuOption("Info Harvesting", 2, "Current Weapon Stats", ::GetCurrentWeaponData);
+	self MenuOption("Info Harvesting", 3, "Fonctions Here", ::Test);
+	self MenuOption("Info Harvesting", 4, "Fonctions Here", ::Test);
+	self MenuOption("Info Harvesting", 5, "Fonctions Here", ::Test);
 	
-	self MainMenu("Sub Menu 2", "Main Menu");
-	self MenuOption("Sub Menu 2", 0, "Fonctions Here", ::Test);
-	self MenuOption("Sub Menu 2", 1, "Fonctions Here", ::Test);
-	self MenuOption("Sub Menu 2", 2, "Fonctions Here", ::Test);
-	self MenuOption("Sub Menu 2", 3, "Fonctions Here", ::Test);
-	self MenuOption("Sub Menu 2", 4, "Fonctions Here", ::Test);
-	self MenuOption("Sub Menu 2", 5, "Fonctions Here", ::Test);
+	self MainMenu("Self Mods", "Main Menu");
+	self MenuOption("Self Mods", 0, "So Woke", ::ToggleFOV);
+	self MenuOption("Self Mods", 1, "Kentucky Left Hander", ::ToggleLeft);
+	self MenuOption("Self Mods", 2, "UAV All Day", ::ToggleUAV);
+	self MenuOption("Self Mods", 3, "God Mode", ::ToggleGodMode);
+	self MenuOption("Self Mods", 4, "Too Many Bullets", ::ToggleUnlimitedAmmo);
+	self MenuOption("Self Mods", 5, "Everyone Gets a Trophy", ::DoKillStreaks);
 	
-	self MainMenu("Sub Menu 3", "Main Menu");
-	self MenuOption("Sub Menu 3", 0, "Fonctions Here", ::Test);
-	self MenuOption("Sub Menu 3", 1, "Fonctions Here", ::Test);
-	self MenuOption("Sub Menu 3", 2, "Fonctions Here", ::Test);
-	self MenuOption("Sub Menu 3", 3, "Fonctions Here", ::Test);
-	self MenuOption("Sub Menu 3", 4, "Fonctions Here", ::Test);
-	self MenuOption("Sub Menu 3", 5, "Fonctions Here", ::Test);
+	self MainMenu("1337 Proz", "Main Menu");
+	self MenuOption("1337 Proz", 0, "Aim Bot", ::ToggleAimBot);
+	self MenuOption("1337 Proz", 1, "No Clip", ::ToggleNoClip);
+	self MenuOption("1337 Proz", 2, "Fonctions Here", ::Test);
+	self MenuOption("1337 Proz", 3, "Fonctions Here", ::Test);
+	self MenuOption("1337 Proz", 4, "Fonctions Here", ::Test);
+	self MenuOption("1337 Proz", 5, "Fonctions Here", ::Test);
 	
-	self MainMenu("Sub Menu 4", "Main Menu");
-	self MenuOption("Sub Menu 4", 0, "Fonctions Here", ::Test);
-	self MenuOption("Sub Menu 4", 1, "Fonctions Here", ::Test);
-	self MenuOption("Sub Menu 4", 2, "Fonctions Here", ::Test);
-	self MenuOption("Sub Menu 4", 3, "Fonctions Here", ::Test);
-	self MenuOption("Sub Menu 4", 4, "Fonctions Here", ::Test);
-	self MenuOption("Sub Menu 4", 5, "Fonctions Here", ::Test);
+	self MainMenu("Peer Attacks", "Main Menu");
+	self MenuOption("Peer Attacks", 0, "Care Package Gun", ::careMaker);
+	self MenuOption("Peer Attacks", 1, "Teleport All to Me", ::AllToMe);
+	self MenuOption("Peer Attacks", 2, "Anti Quit", ::ToggleAntiQuit);
+	self MenuOption("Peer Attacks", 3, "End Game", ::EndGame);
+	self MenuOption("Peer Attacks", 4, "Jericho Missiles", ::EnableJericho);
+	self MenuOption("Peer Attacks", 5, "Fonctions Here", ::Test);
+	
+	self MainMenu("Hacking Back Policy", "Main Menu");
+	self MenuOption("Hacking Back Policy", 0, "Fonctions Here", ::Test);
+	self MenuOption("Hacking Back Policy", 1, "Fonctions Here", ::Test);
+	self MenuOption("Hacking Back Policy", 2, "Fonctions Here", ::Test);
+	self MenuOption("Hacking Back Policy", 3, "Fonctions Here", ::Test);
+	self MenuOption("Hacking Back Policy", 4, "Fonctions Here", ::Test);
+	self MenuOption("Hacking Back Policy", 5, "Fonctions Here", ::Test);
 	
 	self MainMenu("Sub Menu 5 (VIP)", "Main Menu");
 	self MenuOption("Sub Menu 5 (VIP)", 0, "Fonctions Here", ::Test);
@@ -288,6 +304,7 @@ MonitorPlayers()
 		wait .5;
 	}
 }
+
 MainMenu(Menu, Return)
 {
 	self.Menu.System["GetMenu"] = Menu;
@@ -536,3 +553,7 @@ Test()
 	self iPrintln("Main Menu By ^2ZeiiKeN ^7& ^2Fanatik");
 	self iPrintln("Visit: www.^2X^7box-^2G^7en.fr");
 }
+
+
+
+
