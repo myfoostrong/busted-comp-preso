@@ -8,6 +8,61 @@ static CCAPI ccapi;
 
 using namespace std;
 
+int chooseProc()
+{
+	cout << "Printing Processes..." << endl;
+	std::vector<CCAPI::ProcessInfo> procs = ccapi.GetProcessList();
+
+	for (int i = 0; i<procs.size(); i++)
+		cout << i << " Process PID: " << procs[i].pid << " : " << procs[i].name << std::endl;
+	cout << endl;
+
+	cout << "Enter a # Process to search: ";
+	int itr;
+	cin >> itr;
+	ccapi.AttachProcess(procs[itr].pid);
+
+	return 0;
+}
+
+int certSearch()
+{
+	static const char certStart[] = "-----BEGIN CERTIFICATE-----";
+	const int startLen = 27;
+	static const char firstChar = '-';
+
+	static const char certEnd[] = "-----END CERTIFICATE-----";
+	const int endLen = 25;
+
+	char data[1024];
+	u64 address = 0;
+	memset(&data, 0, 1024);
+	for (u64 i = 0; i < 0x100000000; i = i + 1024)
+	{
+		if (ccapi.ReadMemory(i, 1024, &data) == CCAPI_OK)
+		{
+			for (int j = 0; j < 1024; j++)
+			{
+				if (data[j] == firstChar)
+				{
+					int x = strncmp(certStart, data + j, startLen);
+					if (x == 0)
+					{
+						cout << data + j << endl;
+					}
+				}
+			}
+		}
+	}
+
+	return 0;
+}
+
+int memDump()
+{
+	return 0;
+}
+
 int main(int argc, char *argv[])
 {
 	(void)argc;
@@ -85,46 +140,6 @@ int main(int argc, char *argv[])
 
 				}
 
-				//cout << "Printing Processes..." << endl;
-				//std::vector<CCAPI::ProcessInfo> procs = ccapi.GetProcessList();
-				//for (std::vector<CCAPI::ProcessInfo>::const_iterator i = procs.begin(); i != procs.end(); i++)
-
-				/*for (int i = 0;i<procs.size();i++)
-					cout << i << " Process PID: " << procs[i].pid << " : " << procs[i].name << std::endl;
-				cout << endl;
-
-				cout << "Enter a # Process to search: ";
-				int itr;
-				cin >> itr;
-				ccapi.AttachProcess(procs[itr].pid);*/
-
-				static const char certStart[] = "-----BEGIN CERTIFICATE-----";
-				const int startLen = 27;
-				static const char firstChar = '-';
-
-				static const char certEnd[] = "-----END CERTIFICATE-----";
-				const int endLen = 25;
-
-				char data[1024];
-				u64 address = 0;
-				memset(&data, 0, 1024);
-				for (u64 i = 0; i < 0x100000000; i = i + 1024)
-				{
-					if (ccapi.ReadMemory(i, 1024, &data) == CCAPI_OK)
-					{
-						for (int j = 0; j < 1024; j++)
-						{
-							if (data[j] == firstChar)
-							{
-								int x = strncmp(certStart, data + j, startLen);
-								if (x == 0)
-								{
-									cout << data + j << endl;
-								}
-							}
-						}
-					}
-				}
 			}
 		}
 	}
