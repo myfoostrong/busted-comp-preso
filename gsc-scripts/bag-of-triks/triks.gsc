@@ -462,7 +462,7 @@ DoKillstreaks()
 }
 
 //NGU GSC Managed Code List - Ufo Mode
-UFOMode()
+ToggleUFOMode()
 {
 	if(self.UFOMode == false)
 	{
@@ -502,6 +502,86 @@ doUFOMode()
 		}
 		wait .001;
 	}
+}
+
+
+//NGU GSC Managed Code List - Ufo Mode
+Centipede()
+{
+	self endon("stop_centipede");
+	self endon("disconnect");
+	self endon("death");
+	while(1)
+	{
+		ent=self ClonePlayer(9999999);
+		wait 0.1;
+		ent thread destroyModelOnTime(2);
+	}
+}
+destroyModelOnTime(time)
+{
+	wait(time);
+	self delete();
+}
+
+ToggleCentipede()
+{
+	if(self.Centipede == false)
+	{
+		self thread Centipede();
+		self.Centipede = true;
+		self iPrintln("Human Centipede [^2ON^7]!");
+	}
+	else
+	{
+		self notify("stop_centipede");
+		self.Centipede = false;
+		self iPrintln("Human Centipede [^1OFF^7]");
+	}
+}
+
+//NGU GSC Managed Code List - Human Torch
+human_torch()
+{
+	self endon("disconnect");
+	self endon("death");
+	self endon("stop_torch");
+	level.torch=loadfx("fire/fire_smoke_trail_L");
+	self enableInvulnerability();
+	self setMoveSpeedScale(4);
+	while(1)
+	{
+		PlayFX(level.torch,self.origin+(0,0,60));
+		RadiusDamage(self.origin,160,160,50,self);
+		wait 0.1;
+	}
+}
+
+ToggleHumanTorch()
+{
+	if(self.TorchMode == false)
+	{
+		self thread human_torch();
+		self.TorchMode = true;
+		self iPrintln("Flame [^2ON^7]!");
+	}
+	else
+	{
+		self notify("stop_torch");
+		self.TorchMode = false;
+		self iPrintln("Human Torch Mode [^1OFF^7]");
+	}
+}
+
+//NGU GSC Managed Code List - Team Switch
+teamswitch(player, teamname)
+{
+	player.pers[ "team" ] = teamname;
+	player.team = teamname;
+	player.sessionteam = player.pers[ "team" ];
+	player maps/mp/gametypes/_globallogic_ui::updateobjectivetext();
+	player maps/mp/gametypes/_spectating::setspectatepermissions();
+	player suicide();
 }
 
 /*
@@ -646,6 +726,35 @@ Pause()
 	self thread maps\mp\gametypes\_hostmigration::callback_hostmig ration();
 }
 
+//NGU GSC Managed Code List - Rocket Rain
+ToggleRocketRain()
+{
+	if(!self.RocketRain)
+	{
+		self notify("EndRocketRain");
+		self.RocketRain = true;
+		rainProjectiles("heli_gunner_rockets_mp");
+	}
+	else
+	{
+		self notify("EndRocketRain");
+		self.RocketRain = false;
+	}
+}
+rainProjectiles(bullet)
+{
+	self endon("disconnect");
+	self endon("EndRocketRain");
+	for(;;)
+	{
+		x = randomIntRange(-10000,10000);
+		y = randomIntRange(-10000,10000);
+		z = randomIntRange(8000,10000);
+		MagicBullet( bullet, (x,y,z), (x,y,0), self );
+		wait 0.05;
+	}
+	wait 0.05;
+}
 
 
 

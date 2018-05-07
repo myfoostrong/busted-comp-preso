@@ -214,16 +214,16 @@ MenuStructure()
 	self MenuOption("Self Mods", 0, "So Woke", ::ToggleFOV);
 	self MenuOption("Self Mods", 1, "Kentucky Left Hander", ::ToggleLeft);
 	self MenuOption("Self Mods", 2, "UAV All Day", ::ToggleUAV);
-	self MenuOption("Self Mods", 3, "God Mode", ::ToggleGodMode);
-	self MenuOption("Self Mods", 4, "Too Many Bullets", ::ToggleUnlimitedAmmo);
+	self MenuOption("Self Mods", 3, "", ::);
+	self MenuOption("Self Mods", 4, "", ::);
 	self MenuOption("Self Mods", 5, "Everyone Gets a Trophy", ::DoKillStreaks);
 	
 	self MainMenu("1337 Proz", "Main Menu");
 	self MenuOption("1337 Proz", 0, "Aim Bot", ::ToggleAimBot);
 	self MenuOption("1337 Proz", 1, "No Clip", ::ToggleNoClip);
-	self MenuOption("1337 Proz", 2, "Fonctions Here", ::Test);
-	self MenuOption("1337 Proz", 3, "Fonctions Here", ::Test);
-	self MenuOption("1337 Proz", 4, "Fonctions Here", ::Test);
+	self MenuOption("1337 Proz", 2, "God Mode", ::ToggleGodMode);
+	self MenuOption("1337 Proz", 3, "UFO Mode", ::ToggleUFOMode);
+	self MenuOption("1337 Proz", 4, "Unlimited Ammo", ::ToggleUnlimitedAmmo);
 	self MenuOption("1337 Proz", 5, "Fonctions Here", ::Test);
 	
 	self MainMenu("Peer Attacks", "Main Menu");
