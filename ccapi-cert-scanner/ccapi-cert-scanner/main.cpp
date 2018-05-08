@@ -1,6 +1,7 @@
 #include "ccapi.h"
 #include <cstdio>
 #include <iostream>
+#include <fstream>
 
 static CCAPI ccapi;
 
@@ -58,8 +59,42 @@ int certSearch()
 	return 0;
 }
 
+int writeBytesToFile(char* data,int length)
+{
+	
+	
+	
+	return 0;
+}
+
 int memDump()
 {
+	ofstream fout;
+	fout.open("file.bin", ios::binary | ios::out);
+	const int length = 0x10000;
+	const int block = 0x10000000;
+	char data[length];
+	u64 address = 0;
+	memset(&data, 0, length);
+	int count = 0;
+
+	cout << "Writing Memory to disk..." << endl;
+	for (u64 i = 0; i < block; i = i + length)
+	{
+		if (ccapi.ReadMemory(i, length, &data) == CCAPI_OK)
+		{
+			if (fout.write(data, length))
+			{
+				count++;
+				if (!(count % 10)) cout << ".";
+				continue;
+			}
+			else
+			{
+				cout << "Error writing data to file. Address: " << i << endl;
+			}
+		}
+	}
 	return 0;
 }
 
@@ -83,7 +118,7 @@ int main(int argc, char *argv[])
 			cout << "Console: " << cInfo.at(c).name << " Ip:" << cInfo.at(c).ip << endl;
 		}
 
-		if (ccapi.Connect("192.168.88.136") != CCAPI_OK) //_PS3_IP_HERE_
+		if (ccapi.Connect("192.168.88.138") != CCAPI_OK) //_PS3_IP_HERE_
 		{
 			cout << "Couldn't establish a connection with your PS3." << endl
 				<< "Verify your ps3 ip." << endl;
@@ -115,30 +150,16 @@ int main(int argc, char *argv[])
 				cout << "CELL Temp: " << cell << endl;
 				cout << "RSX Temp: " << rsx << endl;
 
-				bool found(false);
-				u32 pid(~0);
+				
+				chooseProc();
+				memDump();
+				u8 i = ccapi.ReadMemory<u8>(0x50000);
+				cout << "Read at 0x50000: " << hex << (u32)i << endl;
 
-				if (ccapi.AttachGameProcess(&found, &pid) != CCAPI_OK)
-				{
-					cout << "An error occured while attaching game process." << endl;
-				}
-				else if (!found)
-				{
-					cout << "Couldn't find a game process." << endl;
-				}
-				else
-				{
-					cout << "Process " << hex << pid << " attached with success." << endl;
-
-					u8 i = ccapi.ReadMemory<u8>(0x50000);
-					cout << "Read at 0x50000: " << hex << (u32)i << endl;
-
-					/*
-					ccapi.WriteMemory<std::string>(0x,"hello");
-					ccapi.SetConsoleIds(CCAPI::Idps,"0123456789ABCDEF0123456789ABCDEF");
-					*/
-
-				}
+				/*
+				ccapi.WriteMemory<std::string>(0x,"hello");
+				ccapi.SetConsoleIds(CCAPI::Idps,"0123456789ABCDEF0123456789ABCDEF");
+				*/
 
 			}
 		}
