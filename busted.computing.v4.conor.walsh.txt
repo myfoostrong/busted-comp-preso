@@ -112,11 +112,7 @@ If you have not received confirmation of your submission after two business days
 
 Outline:
 
-
-
-
-
-My experiences in the following presentation, and my status as a “subject matter expert”, are from my time working on product security during my employment at Rockstar Games, during the time of peak last-gen use. I’m prevented by NDA from revealing details about GTAV and other titles I worked on, so to stay safe I’ve focused on non-Take Two game titles for the meat of this presentation. All GTAV related references will not be present in the actual presentation, and are here to bolster my submission credibility, and because I probably didn’t find a good example in other titles.
+My experiences in the following presentation, and my status as a “subject matter expert”, are from my time working on product security during my employment at Rockstar Games, during the time of peak last-gen use. I’m prevented by NDA from revealing details about the titles I worked on, so to stay safe I’ve focused on non-Take Two game titles for the meat of this presentation, despite the fact that all of this info is considered “public knowledge”, due to my sources.
 
 I will be using the terms “modding”, “mod”, and “modders”. These all are naturally are from the term modification, or modifying. When a game is manipulated to have its output changed for the user, this is referred to as a “mod”. The person applying the mod is a “modder”, and while running the mod, is in the act of “modding”. The terms exploit, hacker, attacker, etc. just don’t apply to this space all the time.
 
