@@ -1,7 +1,7 @@
 # busted-comp-preso
 Presentation Materials and Code for the "Busted Computing" presentation.
 
-##Abstract:
+## Abstract:
 
   The video gaming threat landscape has always been rife with trouble. It may not contain some of the more advanced threats that we see today, but the actors in the space are persistent and ever vigilant. The industry has taken steps towards securing their environments for their users over the years, but always seem a little behind the curve when it comes to security. Manufacturers have gone the route of building "trusted computing platforms" for third-party game developers to create titles for. These systems promise to restrict user input and allow only what the developers allow it to. Yet like any human creation nothing is perfect and when these platforms are compromised, the developers and their customers oft find themselves in hot modder water.
 
@@ -9,12 +9,12 @@ Presentation Materials and Code for the "Busted Computing" presentation.
 
 Descriptions of Each Section
 
-##Threat Model
+## Threat Model
 
-##ISO
+## ISO
 
-##CCAPI
+## CCAPI
 
-##SPRX
+## SPRX
 
-##GSC Scripts
+## GSC Scripts
